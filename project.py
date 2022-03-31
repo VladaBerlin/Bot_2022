@@ -53,8 +53,8 @@ def send_poem(message):
         for line in poems:
             count_sim = 0
             for i in range(-1, 0 - min(len(mes), len(line)), -1):
-                #Я предполпогаю, что слова точно не рифмуются, если в словах не совпадают слоговые схемы
-                if line[:-1][i] in vowels and mes[i] not in vowels:
+                #Я предполагаю, что слова точно не рифмуются, если в словах не совпадают слоговые схемы
+                if (line[:-1][i] in vowels and mes[i] not in vowels) or (mes[i] in vowels and line[:-1][i] not in vowels)::
                     break
                 if line[:-1][i] == mes[i]:
                     count_sim += 1
@@ -63,10 +63,10 @@ def send_poem(message):
                     count_sim += 1
                 elif line[:-1][i] in pairs.keys() and mes[i] in pairs[line[:-1][i]]:
                     if mes[i] in voiceless:
-                        if i != -1 and mes[i + 1] in sonorants:
+                        if i != -1 and mes[i + 1] in voice:
                             count_sim += 1
                     elif line[:-1][i] in voiceless:
-                        if i != -1 and mes[i + 1] in sonorants:
+                        if i != -1 and mes[i + 1] in voice:
                             count_sim += 1
                     elif line[:-1][i] in voice:
                         if i == -1 or line[:-1][i + 1] in voiceless:
